@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function Recipes() {
     const [recipes, setRecipes] = useState([]);
@@ -83,22 +84,27 @@ function Recipes() {
                 <ul className="recipe-list">
                     {recipes.map((recipe) => (
                         <li
-                            className="recipe-card"
-                            key={recipe.idMeal}
-                        >
-                            <img
-                                className="recipe-image"
-                                src={recipe.strMealThumb}
-                                alt={recipe.strMeal}
-                            />
+    className="recipe-card"
+    key={recipe.idMeal}
+>
+    <Link
+        className="recipe-card-link"
+        to={`/recipes/${recipe.idMeal}`}
+    >
+        <img
+            className="recipe-image"
+            src={recipe.strMealThumb}
+            alt={recipe.strMeal}
+        />
 
-                            <div className="recipe-card-content">
-                                <h3>{recipe.strMeal}</h3>
-                                <p>
-                                    Category: {recipe.strCategory}
-                                </p>
-                            </div>
-                        </li>
+        <div className="recipe-card-content">
+            <h3>{recipe.strMeal}</h3>
+            <p>
+                Category: {recipe.strCategory}
+            </p>
+        </div>
+    </Link>
+</li>
                     ))}
                 </ul>
             )}
