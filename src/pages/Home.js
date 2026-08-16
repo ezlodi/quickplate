@@ -1,10 +1,35 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 function Home() {
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState("");
+    const [featuredRecipes, setFeaturedRecipes] = useState([]);
     const navigate = useNavigate();
+
+    useEffect(() => {
+        fetch("https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert")
+            .then((response) => {
+                if (!response.ok) {
+                    throw new Error("Failed to fetch featured recipes.");
+                }
+
+                return response.json();
+            })
+            .then((data) => {
+    const allRecipes = data.meals || [];
+
+    const shuffledRecipes = [...allRecipes].sort(
+        () => Math.random() - 0.5
+    );
+
+    setFeaturedRecipes(shuffledRecipes.slice(0, 12));
+})
+            .catch(() => {
+                // The homepage can still work if the image strips fail to load.
+                setFeaturedRecipes([]);
+            });
+    }, []);
 
     function handleRandomRecipe() {
         setLoading(true);
@@ -28,15 +53,41 @@ function Home() {
                 navigate(`/recipes/${randomRecipe.idMeal}`);
             })
             .catch(() => {
-                setError("A random recipe could not be loaded. Please try again.");
+                setError(
+                    "A random recipe could not be loaded. Please try again."
+                );
             })
             .finally(() => {
                 setLoading(false);
             });
     }
 
+    const topRecipes = featuredRecipes.slice(0, 6);
+    const bottomRecipes = featuredRecipes.slice(6, 12);
+
+    function renderRecipeImages(recipes) {
+        return recipes.map((recipe) => (
+            <Link
+                className="recipe-strip-item"
+                to={`/recipes/${recipe.idMeal}`}
+                key={recipe.idMeal}
+                aria-label={`View ${recipe.strMeal}`}
+            >
+                <img src={recipe.strMealThumb} alt={recipe.strMeal} />
+            </Link>
+        ));
+    }
+
     return (
         <main className="home-page">
+            {topRecipes.length > 0 && (
+                <div className="recipe-strip">
+                    <div className="recipe-strip-track">
+                        {renderRecipeImages(topRecipes)}
+                    </div>
+                </div>
+            )}
+
             <section className="hero">
                 <p className="hero-label">
                     Simple recipes for every day
@@ -66,6 +117,14 @@ function Home() {
 
                 {error && <p className="error-message">{error}</p>}
             </section>
+
+            {bottomRecipes.length > 0 && (
+                <div className="recipe-strip recipe-strip-bottom">
+                    <div className="recipe-strip-track">
+                        {renderRecipeImages(bottomRecipes)}
+                    </div>
+                </div>
+            )}
         </main>
     );
 }

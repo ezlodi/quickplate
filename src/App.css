@@ -4,8 +4,15 @@
 
 .App {
     min-height: 100vh;
+    display: flex;
+    flex-direction: column;
     background-color: #f8f5f0;
     color: #2f2f2f;
+}
+
+.App > main {
+    flex: 1;
+    width: 100%;
 }
 
 .recipes-page {
@@ -208,7 +215,8 @@ header nav a:hover {
 }
 
 .recipe-details-page {
-    max-width: 1100px;
+    width: 100%;
+    max-width: 1500px;
     margin: 0 auto;
     padding: 40px 24px;
 }
@@ -227,76 +235,186 @@ header nav a:hover {
 
 .recipe-details-card {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+    grid-template-columns:
+        minmax(260px, 0.9fr)
+        minmax(380px, 1.4fr)
+        minmax(240px, 0.8fr);
+    grid-template-areas:
+        "summary instructions ingredients";
+    align-items: start;
     overflow: hidden;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+.recipe-summary {
+    grid-area: summary;
+    min-width: 0;
+}
+
 .recipe-details-image {
+    display: block;
     width: 100%;
-    height: 100%;
-    max-height: 600px;
+    aspect-ratio: 1 / 1;
     object-fit: cover;
 }
 
-.recipe-details-content {
+.recipe-summary-content {
+    padding: 28px;
+}
+
+.recipe-summary-content h2 {
+    margin: 0 0 24px;
+    color: #3d2f25;
+    font-size: 30px;
+}
+
+.recipe-summary-content p {
+    margin: 12px 0;
+    line-height: 1.6;
+}
+
+.recipe-instructions {
+    grid-area: instructions;
     min-width: 0;
-    padding: 32px;
+    padding: 28px 32px;
+    border-left: 1px solid #eee5df;
+    border-right: 1px solid #eee5df;
 }
 
-.recipe-details-content h2 {
-    margin-top: 0;
+.recipe-instructions h3,
+.recipe-ingredients h3 {
+    margin: 0 0 20px;
     color: #3d2f25;
-    font-size: 32px;
+    font-size: 24px;
 }
 
-.recipe-details-content h3 {
-    margin-top: 28px;
-    color: #3d2f25;
-}
-
-.recipe-details-content p {
+.recipe-instructions > p {
     line-height: 1.7;
 }
 
-@media (max-width: 750px) {
+.instruction-list {
+    margin: 0;
+    padding-left: 24px;
+}
+
+.instruction-list li {
+    margin-bottom: 16px;
+    padding-left: 6px;
+    line-height: 1.7;
+}
+
+.instruction-list li::marker {
+    color: #d96c3f;
+    font-weight: 700;
+}
+
+.recipe-ingredients {
+    grid-area: ingredients;
+    min-width: 0;
+    padding: 28px;
+}
+
+.ingredient-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.ingredient-list li {
+    display: grid;
+    grid-template-columns: minmax(55px, auto) 1fr;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee5df;
+    line-height: 1.4;
+}
+
+.ingredient-measure {
+    color: #d96c3f;
+    font-weight: 700;
+}
+
+.recipe-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 28px;
+}
+
+.recipe-links a {
+    display: inline-block;
+    padding: 11px 16px;
+    border: 2px solid #d96c3f;
+    border-radius: 8px;
+    color: #d96c3f;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.recipe-links a:hover {
+    background-color: #fff0eb;
+}
+
+@media (max-width: 950px) {
+    .recipe-details-card {
+        grid-template-columns: minmax(240px, 0.8fr) 1.2fr;
+        grid-template-areas:
+            "summary ingredients"
+            "instructions instructions";
+    }
+
+    .recipe-instructions {
+        border-top: 1px solid #eee5df;
+        border-left: none;
+        border-right: none;
+    }
+}
+
+@media (max-width: 650px) {
     .recipe-details-page {
         padding: 24px 16px;
     }
 
     .recipe-details-card {
         grid-template-columns: 1fr;
+        grid-template-areas:
+            "summary"
+            "ingredients"
+            "instructions";
     }
 
-    .recipe-details-image {
-        max-height: 400px;
-    }
-
-    .recipe-details-content {
+    .recipe-summary-content,
+    .recipe-ingredients,
+    .recipe-instructions {
         padding: 24px;
     }
 
-    .recipe-details-content h2 {
+    .recipe-summary-content h2 {
         font-size: 26px;
+    }
+
+    .recipe-ingredients {
+        border-top: 1px solid #eee5df;
     }
 }
 
 .home-page {
     min-height: calc(100vh - 88px);
     display: grid;
-    place-items: center;
-    padding: 48px 24px;
-    background:
-        linear-gradient(
-            rgba(248, 245, 240, 0.88),
-            rgba(248, 245, 240, 0.88)
-        );
+    grid-template-rows: 160px minmax(320px, 1fr) 160px;
+    gap: 24px;
+    overflow: hidden;
+    padding: 24px 0;
+    background-color: #f8f5f0;
 }
 
 .hero {
+    align-self: center;
+    justify-self: center;
     max-width: 700px;
+    padding: 24px;
     text-align: center;
 }
 
@@ -461,4 +579,93 @@ header nav a:hover {
 .secondary-button:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+}
+
+.recipe-strip {
+    width: 100%;
+    overflow: hidden;
+}
+
+.recipe-strip-track {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    width: 100%;
+    height: 100%;
+}
+
+.recipe-strip-item {
+    min-width: 0;
+    height: 100%;
+    padding: 6px;
+}
+
+.recipe-strip-item img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    transition: transform 0.2s ease;
+}
+
+.recipe-strip-item:hover img {
+    transform: scale(1.03);
+}
+
+.recipe-strip-item:focus {
+    outline: 3px solid rgba(217, 108, 63, 0.5);
+    outline-offset: -3px;
+}
+
+@media (max-width: 600px) {
+    .home-page {
+        grid-template-rows: 110px minmax(360px, 1fr) 110px;
+        gap: 16px;
+        padding: 16px 0;
+    }
+
+    .hero {
+        padding: 16px;
+    }
+
+    .recipe-strip-track {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
+    .recipe-strip-item:nth-child(n + 4) {
+        display: none;
+    }
+
+    .recipe-strip-item {
+        padding: 4px;
+    }
+}
+
+.instruction-list {
+    padding-left: 24px;
+    color: #2f2f2f;
+}
+
+.instruction-list li {
+    margin-bottom: 16px;
+    padding-left: 6px;
+    line-height: 1.7;
+}
+
+.instruction-list li::marker {
+    color: #d96c3f;
+    font-weight: 700;
+}
+
+footer {
+    padding: 20px 24px;
+    background-color: #3d2f25;
+    color: #f8f5f0;
+    text-align: center;
+}
+
+footer p {
+    margin: 0;
+    font-size: 14px;
 }

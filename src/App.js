@@ -1,4 +1,10 @@
-import { BrowserRouter, Route, Routes, Link } from "react-router-dom";
+import {
+  BrowserRouter,
+  Route,
+  Routes,
+  Link
+} from "react-router-dom";
+
 import Home from "./pages/Home";
 import About from "./pages/About";
 import Recipes from "./pages/Recipes";
@@ -7,27 +13,42 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter basename={process.env.NODE_ENV === "production" ? "/ezlodi" : "/"}>
+    <BrowserRouter
+      basename={
+        process.env.NODE_ENV === "production"
+          ? "/ezlodi"
+          : "/"
+      }
+    >
       <div className="App">
-      <header>
-        <h1>
-          <Link to="/">QuickPlate</Link>
-        </h1>
+        <header>
+          <h1>
+            <Link to="/">QuickPlate</Link>
+          </h1>
 
-        <nav aria-label="Main navigation">
-          <Link to="/">Home</Link>
-          <Link to="/recipes">Recipes</Link>  
-          <Link to="/about">About</Link>
-        </nav>
-      </header>
+          <nav aria-label="Main navigation">
+            <Link to="/">Home</Link>
+            <Link to="/recipes">Recipes</Link>
+            <Link to="/about">About</Link>
+          </nav>
+        </header>
 
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/recipes" element={<Recipes />} /> 
-        <Route path="/recipes/:id" element={<RecipeDetails />} /> 
-        <Route path="/about" element={<About />} />
-      </Routes>
-     </div> 
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route
+            path="/recipes/:id"
+            element={<RecipeDetails />}
+          />
+          <Route path="/about" element={<About />} />
+        </Routes>
+
+        <footer>
+          <p>
+            © 2026 QuickPlate | Created by Elizabeta Zlodi
+          </p>
+        </footer>
+      </div>
     </BrowserRouter>
   );
 }

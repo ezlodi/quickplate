@@ -62,6 +62,29 @@ function RecipeDetails() {
         );
     }
 
+    const ingredients = [];
+
+    for (let number = 1; number <= 20; number++) {
+        const ingredient = recipe[`strIngredient${number}`];
+        const measure = recipe[`strMeasure${number}`];
+
+        if (ingredient && ingredient.trim()) {
+            ingredients.push({
+                ingredient: ingredient.trim(),
+                measure: measure ? measure.trim() : ""
+            });
+        }
+    }
+
+    const instructionSteps = recipe.strInstructions
+        .split(/▢|\r?\n|(?=step\s+\d+)/i)
+        .map((step) =>
+            step
+                .replace(/^step\s+\d+[:.\s-]*/i, "")
+                .trim()
+        )
+        .filter((step) => step !== "");
+
     return (
         <main className="recipe-details-page">
             <Link className="back-link" to="/recipes">
@@ -69,28 +92,80 @@ function RecipeDetails() {
             </Link>
 
             <article className="recipe-details-card">
-                <img
-                    className="recipe-details-image"
-                    src={recipe.strMealThumb}
-                    alt={recipe.strMeal}
-                />
+    <section className="recipe-summary">
+        <img
+            className="recipe-details-image"
+            src={recipe.strMealThumb}
+            alt={recipe.strMeal}
+        />
 
-                <div className="recipe-details-content">
-                    <h2>{recipe.strMeal}</h2>
+        <div className="recipe-summary-content">
+            <h2>{recipe.strMeal}</h2>
 
-                    <p>
-                        <strong>Category:</strong>{" "}
-                        {recipe.strCategory}
-                    </p>
+            <p>
+                <strong>Category:</strong>{" "}
+                {recipe.strCategory}
+            </p>
 
-                    <p>
-                        <strong>Origin:</strong> {recipe.strArea}
-                    </p>
+            <p>
+                <strong>Origin:</strong> {recipe.strArea}
+            </p>
+            <div className="recipe-links">
+            {recipe.strYoutube && (
+                <a
+                    href={recipe.strYoutube}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    Watch on YouTube
+                </a>
+            )}
 
-                    <h3>Instructions</h3>
-                    <p>{recipe.strInstructions}</p>
-                </div>
-            </article>
+            {recipe.strSource && (
+                <a
+                    href={recipe.strSource}
+                    target="_blank"
+                    rel="noreferrer"
+                >
+                    View original source
+                </a>
+            )}
+        </div>
+        </div>
+    </section>
+
+    <section className="recipe-instructions">
+        <h3>Instructions</h3>
+
+        {instructionSteps.length > 1 ? (
+            <ol className="instruction-list">
+                {instructionSteps.map((step, index) => (
+                    <li key={index}>{step}</li>
+                ))}
+            </ol>
+        ) : (
+            <p>{recipe.strInstructions}</p>
+        )}
+    </section>
+
+    <aside className="recipe-ingredients">
+        <h3>Ingredients</h3>
+
+        <ul className="ingredient-list">
+            {ingredients.map((item, index) => (
+                <li key={index}>
+                    {item.measure && (
+                        <span className="ingredient-measure">
+                            {item.measure}
+                        </span>
+                    )}
+
+                    <span>{item.ingredient}</span>
+                </li>
+            ))}
+        </ul>
+    </aside>
+</article>
         </main>
     );
 }
