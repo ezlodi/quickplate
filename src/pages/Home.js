@@ -17,13 +17,13 @@ function Home() {
                 return response.json();
             })
             .then((data) => {
-    const allRecipes = data.meals || [];
+                const allRecipes = data.meals || [];
 
-    const shuffledRecipes = [...allRecipes].sort(
-        () => Math.random() - 0.5
-    );
+                const shuffledRecipes = [...allRecipes].sort(
+                    () => Math.random() - 0.5
+                );
 
-    setFeaturedRecipes(shuffledRecipes.slice(0, 12));
+                setFeaturedRecipes(shuffledRecipes.slice(0, 12));
 })
             .catch(() => {
                 // The homepage can still work if the image strips fail to load.
@@ -115,7 +115,11 @@ function Home() {
                     </button>
                 </div>
 
-                {error && <p className="error-message">{error}</p>}
+               {error && (
+    <p className="error-message" role="alert">
+        {error}
+    </p>
+)}
             </section>
 
             {bottomRecipes.length > 0 && (

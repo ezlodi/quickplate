@@ -10,9 +10,9 @@ function About() {
                 </p>
 
                 <p>
-                    Users can search for meals by name, browse
-                    recipe results and open a detailed page with
-                    cooking instructions.
+                    Users can browse randomly selected recipes,
+                    search for meals by name, filter recipes by
+                    category and view complete recipe details.
                 </p>
 
                 <p>

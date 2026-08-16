@@ -33,7 +33,7 @@ function Recipes() {
         setLoading(true);
         setError("");
 
-        const randomRequests = Array.from({ length: 12 }, () =>
+        const randomRequests = Array.from({ length: 14 }, () =>
             fetch("https://www.themealdb.com/api/json/v1/1/random.php")
                 .then((response) => {
                     if (!response.ok) {
@@ -46,11 +46,19 @@ function Recipes() {
 
         Promise.all(randomRequests)
             .then((results) => {
-                const randomRecipes = results.map(
-                    (result) => result.meals[0]
+                const randomRecipes = results
+                    .map((result) => result.meals?.[0])
+                    .filter(Boolean);
+
+                const uniqueRecipes = randomRecipes.filter(
+                    (recipe, index, allRecipes) =>
+                        index ===
+                        allRecipes.findIndex(
+                            (item) => item.idMeal === recipe.idMeal
+                        )
                 );
 
-                setRecipes(randomRecipes);
+                setRecipes(uniqueRecipes.slice(0, 12));
             })
             .catch(() => {
                 setError("Recipes could not be loaded. Please try again.");
@@ -147,55 +155,62 @@ function Recipes() {
                 <p>Browse and search recipes from TheMealDB.</p>
             </section>
 
-          <div className="recipe-controls">
-    <div className="category-filter">
-        <label htmlFor="category-select">
-            Filter by category
-        </label>
+            <div className="recipe-controls">
+                <div className="category-filter">
+                    <label htmlFor="category-select">
+                        Filter by category
+                    </label>
 
-        <select
-            id="category-select"
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-        >
-            <option value="">All categories</option>
+                    <select
+                        id="category-select"
+                        value={selectedCategory}
+                        onChange={handleCategoryChange}
+                        disabled={loading}
+                    >
+                        <option value="">All categories</option>
 
-            {categories.map((category) => (
-                <option
-                    key={category.strCategory}
-                    value={category.strCategory}
-                >
-                    {category.strCategory}
-                </option>
-            ))}
-        </select>
-    </div>
+                        {categories.map((category) => (
+                            <option
+                                key={category.strCategory}
+                                value={category.strCategory}
+                            >
+                                {category.strCategory}
+                            </option>
+                        ))}
+                    </select>
+                </div>
 
-    <form className="search-form" onSubmit={handleSearch}>
-        <label htmlFor="recipe-search">
-            Search by recipe name
-        </label>
+                <form className="search-form" onSubmit={handleSearch}>
+                    <label htmlFor="recipe-search">
+                        Search by recipe name
+                    </label>
 
-        <div className="search-controls">
-            <input
-                id="recipe-search"
-                type="search"
-                value={searchInput}
-                onChange={(event) =>
-                    setSearchInput(event.target.value)
-                }
-                placeholder="For example: pasta"
-            />
+                    <div className="search-controls">
+                        <input
+                            id="recipe-search"
+                            type="search"
+                            value={searchInput}
+                            onChange={(event) =>
+                                setSearchInput(event.target.value)
+                            }
+                            placeholder="For example: pasta"
+                        />
 
-            <button type="submit">Search</button>
-        </div>
-    </form>
-</div>  
+                        <button type="submit" disabled={loading}>
+                            Search
+                        </button>
+                    </div>
+                </form>
+            </div>
 
             {loading ? (
-                <p className="status-message">Loading recipes...</p>
+                <p className="status-message" role="status">
+                    Loading recipes...
+                </p>
             ) : error ? (
-                <p className="status-message">{error}</p>
+                <p className="status-message" role="alert">
+                    {error}
+                </p>
             ) : recipes.length === 0 ? (
                 <p className="status-message">
                     {searchTerm

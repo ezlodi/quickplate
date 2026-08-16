@@ -10,7 +10,7 @@
     color: #2f2f2f;
 }
 
-.App > main {
+.App>main {
     flex: 1;
     width: 100%;
 }
@@ -102,7 +102,7 @@ header h1 {
 }
 
 header h1 a {
-    color: #d96c3f;
+    color: #b95029;
     text-decoration: none;
 }
 
@@ -118,7 +118,7 @@ header nav a {
 }
 
 header nav a:hover {
-    color: #d96c3f;
+    color: #b95029;
 }
 
 @media (max-width: 600px) {
@@ -159,7 +159,7 @@ header nav a:hover {
 }
 
 .search-controls input:focus {
-    border-color: #d96c3f;
+    border-color: #b95029;
     outline: 3px solid rgba(217, 108, 63, 0.2);
 }
 
@@ -167,7 +167,7 @@ header nav a:hover {
     padding: 12px 22px;
     border: none;
     border-radius: 8px;
-    background-color: #d96c3f;
+    background-color: #b95029;
     color: white;
     font: inherit;
     font-weight: 600;
@@ -175,7 +175,7 @@ header nav a:hover {
 }
 
 .search-controls button:hover {
-    background-color: #b95029;
+    background-color: #963d1e;
 }
 
 .search-controls button:focus {
@@ -224,7 +224,7 @@ header nav a:hover {
 .back-link {
     display: inline-block;
     margin-bottom: 24px;
-    color: #d96c3f;
+    color: #b95029;
     font-weight: 600;
     text-decoration: none;
 }
@@ -236,9 +236,7 @@ header nav a:hover {
 .recipe-details-card {
     display: grid;
     grid-template-columns:
-        minmax(260px, 0.9fr)
-        minmax(380px, 1.4fr)
-        minmax(240px, 0.8fr);
+        minmax(260px, 0.9fr) minmax(380px, 1.4fr) minmax(240px, 0.8fr);
     grid-template-areas:
         "summary instructions ingredients";
     align-items: start;
@@ -290,7 +288,7 @@ header nav a:hover {
     font-size: 24px;
 }
 
-.recipe-instructions > p {
+.recipe-instructions>p {
     line-height: 1.7;
 }
 
@@ -306,7 +304,7 @@ header nav a:hover {
 }
 
 .instruction-list li::marker {
-    color: #d96c3f;
+    color: #b95029;
     font-weight: 700;
 }
 
@@ -332,7 +330,7 @@ header nav a:hover {
 }
 
 .ingredient-measure {
-    color: #d96c3f;
+    color: #b95029;
     font-weight: 700;
 }
 
@@ -346,9 +344,9 @@ header nav a:hover {
 .recipe-links a {
     display: inline-block;
     padding: 11px 16px;
-    border: 2px solid #d96c3f;
+    border: 2px solid #b95029;
     border-radius: 8px;
-    color: #d96c3f;
+    color: #b95029;
     font-weight: 600;
     text-decoration: none;
 }
@@ -420,7 +418,7 @@ header nav a:hover {
 
 .hero-label {
     margin-bottom: 12px;
-    color: #d96c3f;
+    color: #b95029;
     font-weight: 700;
     letter-spacing: 1px;
     text-transform: uppercase;
@@ -444,14 +442,14 @@ header nav a:hover {
     display: inline-block;
     padding: 14px 26px;
     border-radius: 8px;
-    background-color: #d96c3f;
+    background-color: #b95029;
     color: white;
     font-weight: 600;
     text-decoration: none;
 }
 
 .primary-button:hover {
-    background-color: #b95029;
+    background-color: #963d1e;
 }
 
 .primary-button:focus {
@@ -487,6 +485,7 @@ header nav a:hover {
 }
 
 @media (max-width: 600px) {
+
     .home-page,
     .about-page {
         padding: 32px 16px;
@@ -548,6 +547,16 @@ header nav a:hover {
     outline-offset: 2px;
 }
 
+.search-controls button:disabled,
+.category-filter select:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.search-controls button:disabled:hover {
+    background-color: #b95029;
+}
+
 @media (max-width: 700px) {
     .recipe-controls {
         grid-template-columns: 1fr;
@@ -563,10 +572,10 @@ header nav a:hover {
 
 .secondary-button {
     padding: 14px 24px;
-    border: 2px solid #c94f25;
+    border: 2px solid #b95029;
     border-radius: 8px;
     background-color: transparent;
-    color: #c94f25;
+    color: #b95029;
     font: inherit;
     font-weight: 600;
     cursor: pointer;
@@ -642,20 +651,19 @@ header nav a:hover {
     }
 }
 
-.instruction-list {
-    padding-left: 24px;
-    color: #2f2f2f;
+header h1 a:focus-visible,
+header nav a:focus-visible,
+.back-link:focus-visible,
+.recipe-links a:focus-visible,
+.secondary-button:focus-visible {
+    outline: 3px solid #b95029;
+    outline-offset: 3px;
+    border-radius: 4px;
 }
 
-.instruction-list li {
-    margin-bottom: 16px;
-    padding-left: 6px;
-    line-height: 1.7;
-}
-
-.instruction-list li::marker {
-    color: #d96c3f;
-    font-weight: 700;
+.recipe-card-link:focus-visible {
+    outline: 3px solid #b95029;
+    outline-offset: -3px;
 }
 
 footer {

@@ -35,7 +35,7 @@ function RecipeDetails() {
     if (loading) {
         return (
             <main className="recipe-details-page">
-                <p className="status-message">
+                <p className="status-message" role="status">
                     Loading recipe details...
                 </p>
             </main>
@@ -45,7 +45,9 @@ function RecipeDetails() {
     if (error) {
         return (
             <main className="recipe-details-page">
-                <p className="status-message">{error}</p>
+                <p className="status-message" role="alert">
+                    {error}
+                </p>
             </main>
         );
     }
@@ -53,7 +55,7 @@ function RecipeDetails() {
     if (!recipe) {
         return (
             <main className="recipe-details-page">
-                <p className="status-message">
+                <p className="status-message" role="alert">
                     Recipe could not be found.
                 </p>
 
@@ -76,7 +78,7 @@ function RecipeDetails() {
         }
     }
 
-    const instructionSteps = recipe.strInstructions
+    const instructionSteps = (recipe.strInstructions || "")
         .split(/▢|\r?\n|(?=step\s+\d+)/i)
         .map((step) =>
             step
@@ -92,80 +94,82 @@ function RecipeDetails() {
             </Link>
 
             <article className="recipe-details-card">
-    <section className="recipe-summary">
-        <img
-            className="recipe-details-image"
-            src={recipe.strMealThumb}
-            alt={recipe.strMeal}
-        />
+                <section className="recipe-summary">
+                    <img
+                        className="recipe-details-image"
+                        src={recipe.strMealThumb}
+                        alt={recipe.strMeal}
+                    />
 
-        <div className="recipe-summary-content">
-            <h2>{recipe.strMeal}</h2>
+                    <div className="recipe-summary-content">
+                        <h2>{recipe.strMeal}</h2>
 
-            <p>
-                <strong>Category:</strong>{" "}
-                {recipe.strCategory}
-            </p>
+                        <p>
+                            <strong>Category:</strong>{" "}
+                            {recipe.strCategory}
+                        </p>
 
-            <p>
-                <strong>Origin:</strong> {recipe.strArea}
-            </p>
-            <div className="recipe-links">
-            {recipe.strYoutube && (
-                <a
-                    href={recipe.strYoutube}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    Watch on YouTube
-                </a>
-            )}
+                        <p>
+                            <strong>Origin:</strong> {recipe.strArea}
+                        </p>
+                        <div className="recipe-links">
+                            {recipe.strYoutube && (
+                                <a
+                                    href={recipe.strYoutube}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Watch on YouTube
+                                </a>
+                            )}
 
-            {recipe.strSource && (
-                <a
-                    href={recipe.strSource}
-                    target="_blank"
-                    rel="noreferrer"
-                >
-                    View original source
-                </a>
-            )}
-        </div>
-        </div>
-    </section>
+                            {recipe.strSource && (
+                                <a
+                                    href={recipe.strSource}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    View original source
+                                </a>
+                            )}
+                        </div>
+                    </div>
+                </section>
 
-    <section className="recipe-instructions">
-        <h3>Instructions</h3>
+                <section className="recipe-instructions">
+                    <h3>Instructions</h3>
 
-        {instructionSteps.length > 1 ? (
-            <ol className="instruction-list">
-                {instructionSteps.map((step, index) => (
-                    <li key={index}>{step}</li>
-                ))}
-            </ol>
-        ) : (
-            <p>{recipe.strInstructions}</p>
-        )}
-    </section>
-
-    <aside className="recipe-ingredients">
-        <h3>Ingredients</h3>
-
-        <ul className="ingredient-list">
-            {ingredients.map((item, index) => (
-                <li key={index}>
-                    {item.measure && (
-                        <span className="ingredient-measure">
-                            {item.measure}
-                        </span>
+                    {instructionSteps.length > 1 ? (
+                        <ol className="instruction-list">
+                            {instructionSteps.map((step, index) => (
+                                <li key={index}>{step}</li>
+                            ))}
+                        </ol>
+                    ) : recipe.strInstructions?.trim() ? (
+                        <p>{recipe.strInstructions}</p>
+                    ) : (
+                        <p>No instructions are available for this recipe.</p>
                     )}
+                </section>
 
-                    <span>{item.ingredient}</span>
-                </li>
-            ))}
-        </ul>
-    </aside>
-</article>
+                <aside className="recipe-ingredients">
+                    <h3>Ingredients</h3>
+
+                    <ul className="ingredient-list">
+                        {ingredients.map((item, index) => (
+                            <li key={index}>
+                                {item.measure && (
+                                    <span className="ingredient-measure">
+                                        {item.measure}
+                                    </span>
+                                )}
+
+                                <span>{item.ingredient}</span>
+                            </li>
+                        ))}
+                    </ul>
+                </aside>
+            </article>
         </main>
     );
 }

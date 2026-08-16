@@ -34,20 +34,19 @@ function App() {
           </nav>
         </header>
 
-      <Routes>
-  <Route path="/" element={<Home />} />
-  <Route path="/recipes" element={<Recipes />} />
-  <Route
-    path="/recipes/:id"
-    element={<RecipeDetails />}
-  />
-  <Route path="/about" element={<About />} />
-
-  <Route
-    path="*"
-    element={<Navigate to="/" replace />}
-  />
-</Routes>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/recipes" element={<Recipes />} />
+          <Route
+            path="/recipes/:id"
+            element={<RecipeDetails />}
+          />
+          <Route path="/about" element={<About />} />
+          <Route
+            path="*"
+            element={<Navigate to="/" replace />}
+          />
+        </Routes>
 
         <footer>
           <p>
