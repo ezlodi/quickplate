@@ -435,3 +435,30 @@ header nav a:hover {
         grid-template-columns: 1fr;
     }
 }
+
+.hero-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.secondary-button {
+    padding: 14px 24px;
+    border: 2px solid #c94f25;
+    border-radius: 8px;
+    background-color: transparent;
+    color: #c94f25;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.secondary-button:hover {
+    background-color: #fff0eb;
+}
+
+.secondary-button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
