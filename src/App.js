@@ -2,7 +2,8 @@ import {
   BrowserRouter,
   Route,
   Routes,
-  Link
+  Link,
+  Navigate
 } from "react-router-dom";
 
 import Home from "./pages/Home";
@@ -33,15 +34,20 @@ function App() {
           </nav>
         </header>
 
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/recipes" element={<Recipes />} />
-          <Route
-            path="/recipes/:id"
-            element={<RecipeDetails />}
-          />
-          <Route path="/about" element={<About />} />
-        </Routes>
+      <Routes>
+  <Route path="/" element={<Home />} />
+  <Route path="/recipes" element={<Recipes />} />
+  <Route
+    path="/recipes/:id"
+    element={<RecipeDetails />}
+  />
+  <Route path="/about" element={<About />} />
+
+  <Route
+    path="*"
+    element={<Navigate to="/" replace />}
+  />
+</Routes>
 
         <footer>
           <p>
