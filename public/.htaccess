@@ -1,0 +1,6 @@
+RewriteEngine On
+RewriteBase /ezlodi/
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule . /ezlodi/index.html [L]
