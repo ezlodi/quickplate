@@ -1,70 +1,96 @@
-# Getting Started with Create React App
+# QuickPlate
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+QuickPlate is a simple and responsive React web application for finding recipes. It retrieves recipe data from the public TheMealDB API.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Browse recipes from TheMealDB
+- Search for recipes by name
+- View a recipe's image, category and origin
+- Open a dynamic page with complete cooking instructions
+- Loading, error and no-results states
+- Responsive layout for desktop and mobile screens
+- Client-side navigation without full page reloads
 
-### `npm start`
+## Technologies
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- React
+- React Router
+- JavaScript
+- HTML
+- CSS
+- TheMealDB API
+- Git
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## API
 
-### `npm test`
+QuickPlate uses two TheMealDB API endpoints.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Search for recipes:
 
-### `npm run build`
+```text
+https://www.themealdb.com/api/json/v1/1/search.php?s=SEARCH_TERM
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Get recipe details by ID:
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+```text
+https://www.themealdb.com/api/json/v1/1/lookup.php?i=RECIPE_ID
+```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Application routes
 
-### `npm run eject`
+- `/` – Home page
+- `/recipes` – Recipe search and results
+- `/recipes/:id` – Dynamic recipe details
+- `/about` – Information about the application
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Running the project locally
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Clone or download the project.
+2. Open the project folder in a terminal.
+3. Install the dependencies:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```bash
+npm install
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+4. Start the development server:
 
-## Learn More
+```bash
+npm start
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+5. Open `http://localhost:3000` in a browser.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Testing
 
-### Code Splitting
+Run the automated test with:
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+```bash
+npm test
+```
 
-### Analyzing the Bundle Size
+## Production build
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+Create an optimized production build with:
 
-### Making a Progressive Web App
+```bash
+npm run build
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+The generated files will be available in the `build` folder.
 
-### Advanced Configuration
+## Accessibility and responsive design
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+The application uses semantic HTML elements, connected form labels, meaningful image alternative text, keyboard focus styles and an accessible navigation label.
 
-### Deployment
+The responsive layout adapts the recipe grid, search form, navigation and recipe details to the available screen width.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Data source
 
-### `npm run build` fails to minify
+Recipe information and images are provided by [TheMealDB](https://www.themealdb.com/).
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## Author
+
+Elizabeta Zlodi
