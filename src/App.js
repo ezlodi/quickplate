@@ -7,7 +7,7 @@ import "./App.css";
 
 function App() {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.NODE_ENV === "production" ? "/ezlodi" : "/"}>
       <div className="App">
       <header>
         <h1>

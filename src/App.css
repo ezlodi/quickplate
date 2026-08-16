@@ -390,3 +390,48 @@ header nav a:hover {
         font-size: 28px;
     }
 }
+
+.recipe-controls {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 1rem;
+    align-items: end;
+    max-width: 850px;
+    margin: 0 auto 2rem;
+}
+
+.recipe-controls .category-filter,
+.recipe-controls .search-form {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+}
+
+.category-filter label,
+.search-form label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.category-filter select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d4c8be;
+    border-radius: 8px;
+    background-color: white;
+    color: #382b24;
+    font: inherit;
+    cursor: pointer;
+}
+
+.category-filter select:focus {
+    outline: 2px solid #df6b3b;
+    outline-offset: 2px;
+}
+
+@media (max-width: 700px) {
+    .recipe-controls {
+        grid-template-columns: 1fr;
+    }
+}
